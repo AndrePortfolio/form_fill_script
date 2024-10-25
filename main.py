@@ -28,6 +28,21 @@ with open(csv_file_path, mode='r') as file:
 	for row in csv_reader:
 		people.append(row)
 
+
+valid_cities = {
+	'NCR': ['Delhi', 'Gurgaon', 'Noida'],
+	'Uttar Pradesh': ['Agra', 'Lucknow', 'Merrut'],
+	'Haryana': ['Karnal', 'Panipat'],
+	'Rajasthan': ['Jaipur', 'Jaiselmer']
+}
+
+valid_subjects = [
+	'Maths', 'Accounting', 'Arts', 'Social Studies', 'Biology',
+	'Physics', 'Chemisty', 'Computer Science', 'Commerce',
+	'Economics', 'Civics', 'Hindi', 'English', 'History'
+]
+
+
 # Initialize WebDriver
 driver = webdriver.Chrome()
 
@@ -53,20 +68,19 @@ try:
 	site = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[text()="Practice Form"]')))
 	site.click()
 
-	# Wait for the form to load (you may need to adjust this to wait for the specific form)
-	time.sleep(1)
+	#first name
 	first_name = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="firstName"]')))
 	first_name.send_keys(people[0]['Name'])
 
-	time.sleep(1)
+	#last name
 	last_name = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="lastName"]')))
 	last_name.send_keys(people[0]['Last Name'])
 
-	time.sleep(1)
+	#email
 	email = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="userEmail"]')))
 	email.send_keys(people[0]['Email'])
 
-	time.sleep(1)
+	#gender
 	if people[0]['Gender'] == "Male":
 		gender_xpath = '//*[@for="gender-radio-1"]'
 	elif people[0]['Gender'] == "Female":
@@ -76,28 +90,53 @@ try:
 	gender = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, gender_xpath)))
 	gender.click()
 
-	time.sleep(1)
+	#mobile number
 	mobile_number = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="userNumber"]')))
 	mobile_number.send_keys(people[0]['Mobile Number'])
 
-
-
-
-
-
-
-
-	time.sleep(1)
-	birthday = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="dateOfBirth"]')))
+	#birthday
+	birthday = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="dateOfBirthInput"]')))
+	birthday.send_keys(Keys.COMMAND, 'a')  # For macOS
 	birthday.send_keys(people[0]['Date of Birth'])
+	birthday.send_keys(Keys.RETURN)
 
-	time.sleep(1)
-	subject = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="subjectsContainer"]')))
+	#subject
+	subject = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="subjectsInput"]')))
 	subject.send_keys(people[0]['Subject'])
+	subject.send_keys(Keys.RETURN)
 
-	time.sleep(1)
+	#address
 	address = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="currentAddress"]')))
 	address.send_keys(people[0]['Address'])
+
+	#hobby
+	if people[0]['Hobbies'] == "Sports":
+		hobby_xpath = '//*[@for="hobbies-checkbox-1"]'
+	elif people[0]['Hobbies'] == "Reading":
+		hobby_xpath = '//*[@for="hobbies-checkbox-2"]'
+	else:
+		hobby_xpath = '//*[@for="hobbies-checkbox-3"]'
+	hobby = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, hobby_xpath)))
+	hobby.click()
+
+	#state
+	state = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="react-select-3-input"]')))
+	state.send_keys(people[0]['State'])
+	state.send_keys(Keys.RETURN)
+
+	#city
+	city = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="react-select-4-input"]')))
+	city.send_keys(people[0]['City'])
+	city.send_keys(Keys.RETURN)
+
+	#submit
+	submit = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="submit"]')))
+	submit.click()
+
+	time.sleep(3)
+	#close
+	closing = WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="closeLargeModal"]')))
+	closing.click()
 
 	# Optional: Wait to observe the result
 	time.sleep(10)

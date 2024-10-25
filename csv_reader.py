@@ -1,10 +1,15 @@
-import	csv
-import	sys
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                  ____   ____       ____     ___                 #
+#                 / ___| / ___|     | ___|   / _ \                #
+#                | |     \___ \     |___ \  | | | |               #
+#                | |___   ___) |     ___) | | |_| |               #
+#                 \____| |____/     |____/   \___/                #
+#                                                                 #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-def	get_people_from_csv():
-	if len(sys.argv) != 2:
-		sys.exit("Usage: python your_script.py <path_to_csv>")
-	csv_file_path = sys.argv[1]
+import	csv
+
+def	get_people_from_csv(csv_file_path):
 	people = []
 
 	with open(csv_file_path, mode='r') as file:

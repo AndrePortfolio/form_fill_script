@@ -15,9 +15,14 @@ from	selenium.webdriver.support import expected_conditions as EC
 import	time
 from	csv_reader import get_people_from_csv
 import	fill_form
+import	sys
 
 def	main():
-	people = get_people_from_csv()
+	if len(sys.argv) != 2:
+		sys.exit("Usage: python your_script.py <path_to_csv>")
+
+	people = get_people_from_csv(sys.argv[1])
+	print(people)
 	driver = init_driver()
 	accept_cookies(driver)
 	search_bar(driver)
@@ -31,6 +36,7 @@ def	main():
 	finally:
 		print("All forms filled.\nExit ...")
 		driver.quit()
+
 
 def	init_driver():
 	# Initialize WebDriver
@@ -49,6 +55,7 @@ def	accept_cookies(driver):
 	except:
 		pass
 
+
 def	search_bar(driver):
 	try:
 		# Wait for the Google search bar to load
@@ -65,6 +72,7 @@ def	search_bar(driver):
 		site.click()
 	except:
 		pass
+
 
 def	fill_form_params(driver, person):
 	try:
@@ -85,6 +93,7 @@ def	fill_form_params(driver, person):
 		time.sleep(1)
 	except:
 		driver.quit()
+
 
 if __name__ in "__main__":
 	main()

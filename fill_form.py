@@ -1,7 +1,18 @@
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#                  ____   ____       ____     ___                 #
+#                 / ___| / ___|     | ___|   / _ \                #
+#                | |     \___ \     |___ \  | | | |               #
+#                | |___   ___) |     ___) | | |_| |               #
+#                 \____| |____/     |____/   \___/                #
+#                                                                 #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 from	selenium.webdriver.support.ui import WebDriverWait
 from	selenium.webdriver.common.by import By
 from	selenium.webdriver.support import expected_conditions as EC
 from	selenium.webdriver.common.keys import Keys
+import	sys
+import	time
 
 def	first_name(driver, person):
 	try:
@@ -47,7 +58,7 @@ def	mobile_number(driver, person):
 def	birthday(driver, person):
 	try:
 		birthday = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="dateOfBirthInput"]')))
-		birthday.send_keys(Keys.COMMAND, 'a')  # For macOS
+		birthday.send_keys(Keys.COMMAND, 'a')
 		birthday.send_keys(person['Date of Birth'])
 		birthday.send_keys(Keys.RETURN)
 	except:

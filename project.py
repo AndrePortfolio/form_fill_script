@@ -22,7 +22,6 @@ def	main():
 		sys.exit("Usage: python your_script.py <path_to_csv>")
 
 	people = get_people_from_csv(sys.argv[1])
-	print(people)
 	driver = init_driver()
 	accept_cookies(driver)
 	search_bar(driver)

@@ -1,6 +1,5 @@
 # form_fill script
-    #### Video Demo:  https://youtu.be/geFXT0NGGjU
-    #### Description:
+    Video Demo:  https://youtu.be/geFXT0NGGjU
 
 ## Overview
 This project, named **form_fill script**, is designed to automate the process of filling out a specific online form, reducing manual input time and improving efficiency. Using **Python** and the **Selenium WebDriver** library, the project interacts with the form, enters required information, and submits it. This automation script can be adapted to work with various web forms by adjusting the input fields and selectors.
@@ -35,3 +34,4 @@ Some key design choices and their rationales include:
    ```bash
    git clone <repository-url>
    cd project-directory
+   python project.py data.csv

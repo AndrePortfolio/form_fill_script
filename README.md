@@ -32,6 +32,6 @@ Some key design choices and their rationales include:
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
-   cd project-directory
+   git clone git@github.com:AndrePortfolio/form_fill_script.git
+   cd form_fill_script
    python project.py data.csv
